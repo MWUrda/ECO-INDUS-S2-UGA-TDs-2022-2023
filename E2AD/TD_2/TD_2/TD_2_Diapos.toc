@@ -1,0 +1,2 @@
+\select@language {french}
+\beamer@sectionintoc {1}{Exercice 1: H2O}{3}{0}{1}
