@@ -1,0 +1,2 @@
+\babel@toc {french}{}
+\beamer@sectionintoc {1}{Rappels sur la double marge et exercice d'application}{3}{0}{1}
