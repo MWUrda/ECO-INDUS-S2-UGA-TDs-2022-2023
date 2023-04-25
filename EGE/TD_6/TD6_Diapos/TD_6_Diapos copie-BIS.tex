@@ -268,30 +268,22 @@ la firme $i$ maximise $\pi_i$ par rapport à $q_i$ qui est sa seule variable de 
 \end{frame}
 
 \begin{frame}[allowframebreaks]{\insertsection}
-    \framesubtitle{Avec fusion}
+    \framesubtitle{Après fusion}
     \begin{itemize}
         \item 2 firmes fusionnent et par conséquent $N=8$ désormais, d'où:
-        
-         \begin{align*}
-        Q^*_{(N=8)} &= \frac{N}{(N+1)}\frac{(a-c)}{b} = \frac{8}{(8+1)}\frac{(180-30)}{1} = 135,\\
-        p^*_{(N=8)} &= \frac{a+Nc}{N+1} = \frac{180+8\times 30}{(8+1)} = 45,\\
-        q_{(i, N=8)}^*&=  \frac{(a-c)}{(N+1)b} = \frac{(180-30)}{(8+1)\times 1} =15   ,\\
-        \pi_{(i, N=8)}^*&= \frac{1}{1}\left(\frac{180-30}{8+1}\right)^2 = 225.
-        \end{align*}
     \end{itemize}
         \begin{enumerate}[$\star$]
-            \item $Q^*_{N=8} = 142.2$, 
-            \item $p^*_{(N=8)}=57.8$, 
-            \item $q_{(i, N=8)}^* = 17.8$,  
-            \item $\pi_{(i, N=8)}^*= 316$. 
+            \item $Q^*_{N=8} = 133,33$, 
+            \item $p^*_{(N=8)}=46,67$, 
+            \item $q_{(i, N=8)}^* = 16,67$,  
+            \item $\pi_{(i, N=8)}^*= 277,89$. 
             \item Ce dernier chiffre donnant un surplus des producteurs de 
             $SP^* = N\pi_{(i, N=8)}^*=2528$.
             \item On calcule aussi le surplus du consommateur  
-            $SC_{(N=8)}^* = SC(Q_{(N=8)}^*) = \frac{142.3^2}{2} = 10110.4$.
+            $SC_{(N=8)}^* = SC(Q_{(N=8)}^*) = \frac{133,333^2}{2}$.
             \framebreak
             \item Ces résultats illustrent la règle du 80\% puisque le profit de la firme fusionnée 
-            est inférieur au profit total des trois firmes avant la fusion(soit $316$ 
-            après fusion contre $3\times 211.6$). 
+            est inférieur au profit total des 2 firmes avant la fusion: $277,89 < 225\times 2$.
             \item Le profit des firmes ne participant pas à la fusion augmente. 
             Elles bénéficient indirectement de celle-ci.
             \item On note aussi que le surplus du consommateur diminue 
@@ -324,17 +316,17 @@ la firme $i$ maximise $\pi_i$ par rapport à $q_i$ qui est sa seule variable de 
             \end{align*}
             \item La demande peut s'écrire alors:
             \begin{align*}
-                p(Q) &= 200 - ( q_{-i} + q_L + q_i ).
+                p(Q) &= 180 - ( q_{-i} + q_L + q_i ).
             \end{align*}
             \item Et le profit de la firme $i$ s'écrit:
             \begin{align*}
-                \pi_i(q_i) &= \left[200 - (q_{-i} + q_L + q_i ) \right] - 40q_i = \left[160 - ( q_{-i} + q_L + q_i )\right]q_i.
+                \pi_i(q_i) &= \left[180 - (q_{-i} + q_L + q_i ) \right] - 30q_i = \left[150 - ( q_{-i} + q_L + q_i )\right]q_i.
             \end{align*}
             \item La c.p.o. associée à la maximisation du profit permet de définir la fonction
             de meilleure réponse de la firme $i$:
             \begin{align*}
              \frac{\partial \pi_i}{\partial q_i}(q_i^{*}) = 0 &\Rightarrow 
-             q_i^{*} = q_i^{mr}(q_{-i}, q_L) = 80 - \frac{(q_{-i} + q_L)}{2}.
+             q_i^{*} = q_i^{mr}(q_{-i}, q_L) = 75 - \frac{(q_{-i} + q_L)}{2}.
              \end{align*}
              \begin{enumerate}[$\star$]
                 \item Notons $q_{-i}^{*}$ l'analogue à l'équilibre de $q_{-i}$, et $q_L^*$ la quantité offeret
@@ -346,7 +338,7 @@ la firme $i$ maximise $\pi_i$ par rapport à $q_i$ qui est sa seule variable de 
               \end{enumerate}
               \item En utilisant la meilleure réponse de $i$ on obtient alors:
               \begin{align*}
-                  q_i^{*}= 80 - \frac{(6q_i^* + q_L^*)}{2} &\Rightarrow q_i^* = 20 -\frac{q_L^*}{8}.
+                  q_i^{*}= 75 - \frac{(6q_i^* + q_L^*)}{2} &\Rightarrow q_i^* = 18.75 -\frac{q_L^*}{8}.
                   \end{align*}
 
              \framebreak
@@ -355,41 +347,41 @@ la firme $i$ maximise $\pi_i$ par rapport à $q_i$ qui est sa seule variable de 
              qui suivent obtenues à l'étape précédente.  
              \item Le profit de la firme leader s'écrit:
              \begin{align*}
-                \pi_L(q_L) &= P(Q)-cq_L =  \left(200 -q_L - \sum_{i=1}^7 q_i\right)q_L - 40q_L 
-                = \left(160 -q_L + \sum_{i=1}^7 q_i\right) q_L
+                \pi_L(q_L) &= P(Q)-cq_L =  \left(180 -q_L - \sum_{i=1}^7 q_i\right)q_L - 30q_L 
+                = \left(150 -q_L + \sum_{i=1}^7 q_i\right) q_L
              \end{align*}
              \item En particulier, à l'optimum ce profit peut s'écrire:
              \begin{enumerate}[$\star$]
                 \item Peut s'écrire:
                 \begin{align*}
-                \pi_L(q_L^*) = \left(160 -q_L^* - \sum_{i=1}^7 \underbrace{q_i^*}_{20 -\frac{q_L^*}{8}}\right)q_L^* 
-                &= \left(160 -q_L^* - 7\left(20 -\frac{q_L^*}{8}\right)\right)q_L^*\\
-                &= \left(20-\frac{q_L^*}{8}\right)q_L^*\\
-                &= 20q_L^* -\frac{q_L{^{*^2}}}{8}
+                \pi_L(q_L^*) = \left(150 -q_L^* - \sum_{i=1}^7 \underbrace{q_i^*}_{18.75 -\frac{q_L^*}{8}}\right)q_L^* 
+                &= \left(150 -q_L^* - 7\left(18.75 -\frac{q_L^*}{8}\right)\right)q_L^*\\
+                &= \left(18.75-\frac{q_L^*}{8}\right)q_L^*\\
+                &= 18.75q_L^* -\frac{q_L{^{*^2}}}{8}
                \end{align*}
                \item Et par définition de $q_L^*$ comme maximisant $\pi_L(\cdot)$, il doit vérifier(c.p.o.):  
                \begin{align*}
-                \frac{\partial \pi_L}{\partial q_L}(q_L^*) = 0 &\Rightarrow q_L^* = 80,
+                \frac{\partial \pi_L}{\partial q_L}(q_L^*) = 0 &\Rightarrow q_L^* = 75,
                \end{align*}
                et on en déduit alors: 
                
                \item la quantité offerte par la firme $i$ à l'équilibre: 
                \begin{align*}
-                q_i^* &= q_i^* = 20 -\frac{q_L^*}{8} = 10, \ \text{pour} \ i=1, \ldots, 7.
+                q_i^* &= q_i^* = 18.75 -\frac{q_L^*}{8} =9.375, \ \text{pour} \ i=1, \ldots, 7.
                \end{align*}
                \item La quantité totale offerte et le prix d'équilibre:
                \begin{align*}
-                Q^* = 7\times q_i^* + q_L^* = 150 &\Rightarrow p^* = P(Q^*) = 200-Q^* = 50.
+                Q^* = 7\times q_i^* + q_L^* = 140.625 &\Rightarrow p^* = P(Q^*) = 180-Q^* = 39.75.
                \end{align*}
                \item Les profits des firmes à l'équilibre:
                \begin{align*}
-               \pi_L^* = (p^* - 40)q_L^* = 800&, \ \pi_i^* = (p^* - 40)q_i^* = 100.
+               \pi_L^* = (p^* - 40)q_L^* = 731.25&, \ \pi_i^* = (p^* - 40)q_i^* = 91.4.
                \end{align*}
                \item  Les surplus des agents sur le marché(c.à.d., firmes et consommateurs):
                \begin{align*}
-                   SP^* = \underbrace{7\times \pi_i^* + \pi_L^*}_{\text{surplus des firmes}} = 1500&, \ 
-                   SC^* =  \underbrace{\frac{Q^{*^2}}{2}}_{\substack{\text{surplus des }\\
-                   \text{consommateurs}}} = 11250.
+                   SP^* &= \underbrace{7\times \pi_i^* + \pi_L^*}_{\text{surplus des firmes}} ,\\ 
+                   SC^* &=  \underbrace{\frac{Q^{*^2}}{2}}_{\substack{\text{surplus des }\\
+                   \text{consommateurs}}}.
                \end{align*}
             
              \end{enumerate}

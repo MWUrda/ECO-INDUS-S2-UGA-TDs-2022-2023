@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{(Bref rappel) sur un mod\IeC {\`e}le de Cournot de base \IeC {\`a} $N$ firmes}{3}{0}{1}
+\beamer@sectionintoc {2}{Exercice d\IeC {\textquoteright }application.}{13}{0}{2}
