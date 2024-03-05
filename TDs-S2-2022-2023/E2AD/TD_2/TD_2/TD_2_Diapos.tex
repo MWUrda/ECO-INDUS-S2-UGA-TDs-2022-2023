@@ -1,0 +1,396 @@
+%\documentclass[ignorenonframetext, compress, 9pt, xcolor=svgnames]{beamer} 
+\input{../../../Config_diapos}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{enumerate}   
+\usepackage{multirow}
+\usepackage{txfonts}
+\usepackage{mathrsfs}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+\usetikzlibrary{positioning, arrows.meta}
+\usepgfplotslibrary{fillbetween}
+\newcommand{\A}{(0,0) ++(135:2) circle (2)}
+\newcommand{\B}{(0,0) ++(45:2) circle (2)}
+\DeclareMathOperator{\C}{C}
+\DeclareMathOperator{\util}{u}
+%\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\setbeamersize{text margin left=1.2cm,text margin right=1.2cm} 
+\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\usepackage{xr}
+%\externaldocument{Econometrie1_UGA_P2e}
+  \usepackage{eso-pic}
+%\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+%\put(\LenToUnit{0.9\paperwidth},\LenToUnit{0.85\paperheight}){#1}}}
+%\AddToShipoutPictureFG{
+ % \AtPagemyUpperLeft{{\includegraphics[width=1.1cm,keepaspectratio]{logoUGA2020.pdf}}}
+%}%
+
+%\setbeamercolor{title}{fg=black}
+%\setbeamercolor{frametitle}{fg=black}
+%\setbeamercolor{section in head/foot}{fg=black}
+%\setbeamercolor{author in head/foot}{bg=Brown}
+%\setbeamercolor{date in head/foot}{fg=Brown}
+\AtBeginSection[]
+  {
+    \ifnum \value{framenumber}>1
+      \begin{frame}<beamer>
+      \frametitle{PLAN}
+      \tableofcontents[currentsection]
+      \end{frame}
+    \else
+    \fi
+  }
+\setbeamertemplate{section page}
+{
+    \begin{centering}
+    \begin{beamercolorbox}[sep=11pt,center]{part title}
+    \usebeamerfont{section title}\thesection.~\insertsection\par
+    \end{beamercolorbox}
+    \end{centering}
+}
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}}
+\title[]{ \textbf{ÉCONOMIE INDUSTRIELLE}\footnote{Responsable du cours: Alexis Garapin.}\\(\textbf{UGA, L3 E2AD, S2})}
+\subtitle{TRAVAUX DIRIGÉS: TD 2 \\  DISSUASION À L'ENTRÉE II.}
+\date{\today}
+\author{Michal W. Urdanivia\inst{*}}
+\institute{\inst{*}UGA, Facult\'e d'\'Economie, GAEL, \\
+e-mail:
+ \href{
+     mailto:michal.wong-urdanivia@univ-grenoble-alpes.fr}{michal.wong-urdanivia@univ-grenoble-alpes.fr}}
+
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}
+%}
+
+\begin{document}
+
+%%% TIKZ STUFF
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}
+\newcommand\markbottomright[2]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+\tikzstyle{observed}=[draw,circle,fill=gray!50]
+
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+ \tableofcontents
+    \end{frame}
+%\begin{frame}
+%\frametitle{Contenu}
+%\tableofcontents[pausesections, pausesubsections]
+%\end{frame}
+
+%\section{Qu'est-ce que l’économétrie ? A quoi (à qui) ça sert ?}
+%\frame{\sectionpage}
+%\begin{frame}
+%  \tableofcontents  
+%\end{frame}
+\section{Exercice 1: H2O}
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Données de l'exercice}
+\begin{itemize}
+\item Une firme, H2O, en monopole sur un marché caractérisée par la fonction de coût: 
+\begin{align}
+CT(q) &= q^2 + 10q,
+\label{eq1}
+\end{align}
+où $q\in \R^+$ représente les quantités produites en millions de $m^3$ d’eau.
+\item La demande sur le marché est donnée par:
+\begin{align}
+p(q) &= 50-4q,
+\label{eq2}
+\end{align}
+où $p(\cdot)$ est la demande inverse donnant le prix  en centime du bien $p=p(q)$  sur le marché pour une quantité offerte $q$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 1: optimum du monopole}
+\begin{itemize}
+\item La firme maximise par rapport à $q$  la fonction de profit:
+\begin{align}
+\pi(q) &= RT(q) - CT(q),
+\label{eq3}
+\end{align}
+où $RT(q) \coloneqq p(q)q$ est la recette de la firme. 
+\item Le choix optimal $q^*$  est donc défini par:
+\begin{align}
+q^* &=\argmax_q \pi(q) \Rightarrow \underbrace{\frac{\partial RT(q)}{\partial q}(q^*) -  \frac{\partial CT(q)}{\partial q}(q^*) = 0}_{\text{c.p.o.}}, 
+\label{eq3}
+\end{align}
+où encore:
+\begin{align*}
+\underbrace{R_m(q^*)}_{\substack{\text{Recette} \\ \text{marginale}}} &= \underbrace{C_m(q^*)}_{\substack{\text{Coût} \\ \text{marginal}}}, 
+\end{align*}
+avec les définitions $R_m(q)\coloneqq \frac{\partial RT(q)}{\partial q}(q)$,  $C_m(q)\coloneqq \frac{\partial CT(q)}{\partial q}(q)$.
+
+\item Nous avons avec \eqref{eq1} et \eqref{eq2},
+\begin{align*}
+RT(q) =  50q-4q^2 \Rightarrow R_m(q) = 50-8q, \quad \text{et} \quad C_m(q) = 2q + 10,
+\end{align*}
+de sorte que la condition dans \eqref{eq3} donne:
+\begin{align*}
+\underbrace{50-8q^*}_{R_m(q^*)} = \underbrace{2q^* + 10}_{C_m(q^*)}  &\Rightarrow q^* = 4,
+\end{align*}
+d'où $p^* = p(q^*) =  34$, $\pi^* = \pi(q^*) = 80$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 2}
+  \begin{itemize}
+   \item On a les fonctions:
+   \begin{align*}
+    C_m(q) &= 2q + 10\\
+    C_M(q) &= q + 10\\
+    R_m(q) &= 50-8q
+   \end{align*}
+  \end{itemize}
+\end{frame} 
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 3: stratégie de prix limite}
+\begin{itemize}
+\item Un entrant potentiel désire pénétrer le marché en vendant 5 unités au coût unitaire constant de 20 euros
+\item \textbf{\underline{Question}}: à quel niveau la firme installée peut-elle fixer son prix
+pour rendre l’entrée non profitable ? Ce prix est le \textbf{\underline{prix limite.}}
+\item \textbf{\underline{Réponse}}: ce prix, $p_L$ prend la forme,
+\begin{align}
+p_L &< c_e + \abs{a}q_e,
+\label{eq4}
+\end{align}
+où:
+\begin{enumerate}[$\cdot$]
+\item $a<0$ est le paramètre d'une fonction de demande inverse linéaire du type $p(Q) = aQ + b$, pour $b>0$, et $Q$ étant la quantité totale offerte sur le marché
+(ici: $a\equiv -4$, $b \equiv 50$),
+\item $c_e$ et $q_e$ sont respectivement le coût unitaire de l'entrant potentiel, et la  quantité potentiellement offerte.
+\end{enumerate}
+\item Par conséquent $p_L$ vérifie,
+\begin{align}
+p_L &< \underbrace{20}_{q_e}+  \underbrace{4}_{\abs{a}} \times \underbrace{20}_{c_e} = 40,
+\label{eq5}
+\end{align}
+et on note que le prix de monopole vérifie \eqref{eq5} et est un prix limite possible pour la firme en place.
+\item  \textbf{\underline{Explication}}(Voir cours: Partie 1. Stratégies anticoncurrentielles, section 3, en particulier slides 35-38):
+\begin{enumerate}[$\cdot$]
+\item Pour que l’entrée ne soit pas profitable, il faut que le prix du
+marché, à l’issue de l’entrée, soit inférieur au coût de production de
+l’entrant potentiel.
+\item  Prix du marché à l’issue de l’entrée:
+\begin{align}
+p(Q) &= aQ + b = a(q_F + q_e ) + b,
+\label{eq6}
+\end{align}
+où $q_F$ est la quantité offerte par la firme en place.
+\item Le prix du marché doit être inférieur au coût de l’entrant, donc par \eqref{eq6}:
+\begin{align}
+p < c_e &\Leftrightarrow  a(q_F + q_e ) + b < c_e,
+\label{eq7}
+\end{align}
+\item D'autre part si la firme en place offre $q_F$ on a un prix $p_F$ et une quantité $q_F$ donnés par:
+\begin{align}
+p_F = p_F(q_F) = aq_F+ b  &\Rightarrow q_F = \frac{1}{a}(p_F - b),
+\label{eq8}
+\end{align}
+\item En utilisant \eqref{eq7} et \eqref{eq8} on obtient:
+\begin{align*}
+a\left( \frac{1}{a}(p_F - b) +  q_e \right) + b < c_e &\Leftrightarrow  p_F < c_e - aq_e \Leftrightarrow p_F < c_e + \abs{a}q_e.
+\end{align*}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 4: rentabilité de la firme en place en cas d'entrée}
+\begin{itemize}
+\item La production totale est alors égale à celle de l’entrant ($q_e = 5$) plus celle de
+ la firme en place qu'elle fixe  en utilisant \eqref{eq8} avec $p_F = 34$
+qui est le prix de monopole:
+\begin{align*}
+q_F &=  -\frac{1}{\underbrace{4}_{a}}(\underbrace{34}_{p_F} - \underbrace{50}_{b}) = 4,
+\end{align*}
+d'où $Q = q_e+q_F = 9$ et un prix s'établissant à $p(9) = 50 - 4\times 9 = 14$.
+\item Pour ce prix les profits des deux firmes sont(on utilise les indice "F" et "e" pour la firme en place et l'entrant respectivement):
+
+\begin{align*}
+\pi_F &= \pi(q_F) = pq_F - CT(q_F) = pq_F-(q_F^2 + 10q_F) = 14\times 4 - 56 = 0,\\
+\pi_e &= pq_e - 20 q_e= 14\times 5 - 20\times 5 = -30.
+\end{align*}
+\item La firme en place demeure donc rentable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 5}
+  \begin{itemize}
+    \item L'entrant décide de s'adresser la demande non servie par la firme en place
+    en supposant que celui-ci maintiendra son prix de monopole calculé dans la question 1. 
+    \item Pour obtenir cette demande résiduelle $q_e(p)$ on utilise la demande de marché \eqref{eq2}
+    en $Q = q_e+q_F$:
+    \begin{align}
+      p(Q) &= 50-4Q = 50-4(q_F + q_e),
+      \label{eq9}
+    \end{align}
+    et pour un prix $p = p(Q)$, \eqref{eq9} permets d'écrire $q_e$ comme fonction de $p$:
+    \begin{align}
+      q_e^d(p) &= \frac{1}{4}(50-p) - q_F = \frac{1}{4}(50-p) - \underbrace{4}_{q_F} = \frac{1}{4}(34-p),
+      \label{eq10}
+    \end{align}
+    où on a utilisé le fait que la firme en place produit la quantité de monopole.
+    \item La demande(inverse) résiduelle associée à \eqref{eq10} pour une quantité $q_e$ est alors:
+    \begin{align}
+      p_{dr}(q_e) = q_e^{d^{-1}}(q_e) = 34-4q_e.
+    \end{align}
+    \item La recette de l'entrant et sa recette marginale sont alors:
+    \begin{align*}
+      RT_e(q_e) = (34-4q_e)q_e&\Rightarrow R_{m,e}(q_e) \coloneqq \frac{\partial RT_e}{\partial q_e}(q_e)
+       = 34-8q_e, 
+    \end{align*}
+    d'où l'on peut obtenir son choix optimal $q_e^*$ maximisant son profit,
+    \begin{align*}
+      q_e^* &=\argmax_{q_e}\underbrace{\pi_e(q_e)}_{RT_e(q_e) - 20q_e},
+    \end{align*}
+    vérifiant la condition(c.à.d., la c.p.o.):
+    \begin{align*}
+      R_{m,e}(q_e) &= \underbrace{20}_{\substack{\text{Coût}\\\text{marginal}}},
+    \end{align*}
+    d'où $q_e^* = \frac{7}{4}$.
+    \item On calcule alors le prix de marché par \eqref{eq2} en $Q = q_F + q_e^* = \frac{23}{4}$:
+    \begin{align*}
+      p\left(\frac{23}{4}\right) &= 27,
+    \end{align*}
+    et finalement le profit de l'entrant:
+    \begin{align*}
+      \pi_e(q_e^*) &=  27 \times \frac{7}{4} - 20 \times  \frac{7}{4} =  \frac{49}{4}.
+    \end{align*}
+    \item Compte-tenu de cette nouvelle stratégie de l’entrant, 
+    le prix de monopole de la firme en place n’est plus un prix limite.
+  \end{itemize}
+\end{frame}  
+
+\section{Exercice 2: Microhard et Newvel}
+\frame{\sectionpage}
+
+\begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 1: Le Jeu}
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=4in]{Arbreq1figAlexis.png}
+\end{center}
+\end{figure}
+\end{frame}  
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 2: Comportement naïf de Microhard}
+\begin{itemize}
+  \item Elle ne cherche pas à modifier les incitations de l’entrant en l’informant ou en le désinformant sur ses coûts.
+  \item Elle fixe alors en première période le prix de monopole $p_m$
+   qui correspond à son niveau 
+  de coûts, soit:
+  \begin{align*}
+    p_m &=\left\{
+    \begin{array}{ll}
+     p_e &\text{si} \quad c = c_e\\
+     p_f &\text{si} \quad c = c_f, \quad \text{avec} \ c_f < c_e, p_f < p_e.
+    \end{array}
+    \right.
+  \end{align*}
+  \item Ce faisant, la firme en place révèle son coût à l’entrant qui entre s’il
+   observe $p_e$ et n’entre pas s’il observe $p_f$ (donc deux équilibres possibles).
+\end{itemize}
+\end{frame}  
+\begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 3: Comportement stratégique de Microhard}
+  \begin{itemize}
+    \item Deux équilibres de Nash (bayésiens)
+\begin{enumerate}
+  \item Équilibre révélateur:
+  \begin{enumerate}[$\cdot$]
+    \item Avec cet équilibre, de prime abord, tout se passe donc comme 
+    quand la firme en place (Microhard)  se comporte naïvement, 
+    à ceci près que la firme en place fixe en première période lorsqu’elle est efficace un prix inférieur à $p_f$ (alors qu’elle fixe $p_e$ lorsque $c = c_e$ ).
+    \item La raison en est que la stratégie de la firme en place ne révèle ses coûts que si elle n’a pas intérêt à faire croire à l’entrant qu’elle a un coût faible alors qu’il est élevé.
+    \item Il faut donc que signaler un coût faible soit une stratégie coûteuse (trop coûteuse pour qu’une firme inefficace puisse la trouver profitable). Le prix fixé par une firme 
+    efficace en première période découle de cette contrainte.
+    \item Remarquons que non seulement il n’y a pas de prédation 
+    dans l’équilibre révélateur, mais les consommateurs profitent en première période de prix (parfois) plus faibles que quand la firme en place se comporte naïvement, les prix de second période étant quant à eux identiques.
+  \end{enumerate}
+
+  \framebreak
+
+  \item Équilibre mélangeant:
+  \begin{enumerate}[$\cdot$]
+    \item Microhard fixe le même prix en première période quel que soit son coût. 
+\item Notons qu’il n’existe pas d’équilibre mélangeant dans lequel l’entrée intervient en seconde période.
+\item La raison en est que si tel est le cas, la firme en place a intérêt à maximiser ses profits en première période, donc à fixer le prix de monopole correspondant à ses coûts en première période, ce qui détruit l’équilibre. Les équilibres mélangeant sont donc des équilibres de prédation.
+\item En fait, Microhard choisit en première période le prix de monopole correspondant à un coût faible quelle que soit la vraie valeur de son coût. Ce faisant, elle profite des doutes de l’entrant Newvell sur la vraie valeur des coûts, doutes suffisamment forts pour que l’entrée soit empêchée
+  \end{enumerate}
+\end{enumerate}
+  \end{itemize}
+\end{frame}  
+
+
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 4: 
+Espérance de gains de Newvell si elle rentre alors que Microhard fixe un prix faible}
+\begin{itemize}
+  \item Si Microhard propose un prix faible en période 1, 
+  elle a un coût faible avec un probabilité $\prob$ et un coût élevé avec une probabilité $1 - \prob$. 
+  \item En conséquence, son espérance de gains si elle rentre sera de :
+\begin{align*}
+  20 \times (1 - \prob) - 20 \times \prob = 20 - 20\prob -20\prob = 20 - 40\prob.
+\end{align*}
+\item N.B. Si Microhard propose un prix élevé en période 1, 
+elle a un coût élevé. L’entrée en seconde période rapportera à Newvell un gain certain de 20
+\end{itemize}
+\end{frame}  
+%\begin{frame}[allowframebreaks]{Références}
+%\bibliographystyle{jpe}
+%\bibliography{../../../Biblio}
+%\end{frame}
+\begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 5: 
+  On suppose que $\prob> \frac{1}{2}$ et que Newvell le sait. 
+  Newvell va-t-elle décider d’entrer ou de ne pas entrer sur le marché ?}
+  \begin{itemize}
+    \item Si $\prob > \frac{1}{2}$, la probabilité que Microhard ait un coût faible est la plus forte
+    \item Dans ce cas l’espérance de gains de Newvell $(20 - 40\prob)$ sera $< 0$. 
+    \item En conséquence, elle ne rentrera pas si elle obserbe que Microhard fixe un prix faible.
+  \end{itemize}
+\end{frame}  
+\end{document}

@@ -1,0 +1,4 @@
+\babel@toc {french}{}
+\beamer@sectionintoc {1}{Rappels de cours}{3}{0}{1}
+\beamer@sectionintoc {2}{Application}{17}{0}{2}
+\beamer@sectionintoc {3}{Concurrence en prix}{21}{0}{3}

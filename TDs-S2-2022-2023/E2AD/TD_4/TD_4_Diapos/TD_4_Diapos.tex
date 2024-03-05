@@ -1,0 +1,345 @@
+%\documentclass[ignorenonframetext, compress, 9pt, xcolor=svgnames]{beamer} 
+\input{../../../Config_diapos}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{enumerate}   
+\usepackage{multirow}
+\usepackage{txfonts}
+\usepackage{mathrsfs}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+\usetikzlibrary{positioning, arrows.meta}
+\usepgfplotslibrary{fillbetween}
+\newcommand{\A}{(0,0) ++(135:2) circle (2)}
+\newcommand{\B}{(0,0) ++(45:2) circle (2)}
+\DeclareMathOperator{\C}{C}
+\DeclareMathOperator{\util}{u}
+%\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\setbeamersize{text margin left=1.2cm,text margin right=1.2cm} 
+\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\usepackage{xr}
+%\externaldocument{Econometrie1_UGA_P2e}
+  \usepackage{eso-pic}
+%\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+%\put(\LenToUnit{0.9\paperwidth},\LenToUnit{0.85\paperheight}){#1}}}
+%\AddToShipoutPictureFG{
+ % \AtPagemyUpperLeft{{\includegraphics[width=1.1cm,keepaspectratio]{logoUGA2020.pdf}}}
+%}%
+
+%\setbeamercolor{title}{fg=black}
+%\setbeamercolor{frametitle}{fg=black}
+%\setbeamercolor{section in head/foot}{fg=black}
+%\setbeamercolor{author in head/foot}{bg=Brown}
+%\setbeamercolor{date in head/foot}{fg=Brown}
+\AtBeginSection[]
+  {
+    \ifnum \value{framenumber}>1
+      \begin{frame}<beamer>
+      \frametitle{PLAN}
+      \tableofcontents[currentsection]
+      \end{frame}
+    \else
+    \fi
+  }
+\setbeamertemplate{section page}
+{
+    \begin{centering}
+    \begin{beamercolorbox}[sep=11pt,center]{part title}
+    \usebeamerfont{section title}\thesection.~\insertsection\par
+    \end{beamercolorbox}
+    \end{centering}
+}
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}}
+\title[]{ \textbf{ÉCONOMIE INDUSTRIELLE}\footnote{Responsable du cours: Alexis Garapin.}\\(\textbf{UGA, L3 E2AD, S2})}
+\subtitle{TRAVAUX DIRIGÉS: TD 4 \\  DISCRIMINATION PAR LE PRIX I.}
+\date{\today}
+\author{Michal W. Urdanivia\inst{*}}
+\institute{\inst{*}UGA, Facult\'e d'\'Economie, GAEL, \\
+e-mail:
+ \href{
+     mailto:michal.wong-urdanivia@univ-grenoble-alpes.fr}{michal.wong-urdanivia@univ-grenoble-alpes.fr}}
+
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}
+%}
+
+\begin{document}
+
+%%% TIKZ STUFF
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}
+\newcommand\markbottomright[2]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+\tikzstyle{observed}=[draw,circle,fill=gray!50]
+
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+ \tableofcontents
+    \end{frame}
+%\begin{frame}
+%\frametitle{Contenu}
+%\tableofcontents[pausesections, pausesubsections]
+%\end{frame}
+
+%\section{Qu'est-ce que l’économétrie ? A quoi (à qui) ça sert ?}
+%\frame{\sectionpage}
+%\begin{frame}
+%  \tableofcontents  
+%\end{frame}
+\section{Exercice 1: ALPHA }
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Données de l'exercice \\}
+\begin{itemize}
+    \item Monope ALPHA avec la fonCTion de coût:
+    \begin{align}
+    CT(q) &= q^2,
+    \label{eq1}
+    \end{align}
+   \item Un marché caractérisé par la demande inverse:
+   \begin{align}
+     p(q)=120-q,
+     \label{eq2}
+   \end{align}
+\end{itemize}
+    \end{frame}
+
+    \begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Question 1\\}
+\begin{itemize}
+\item \textbf{\underline{Problème}}: calculer le profit pour une tarification linéaire.
+ 
+\item \textbf{\underline{Solution}}:
+
+\begin{enumerate}[$\cdot$]
+\item Le choix optimal de la firme est donné par:
+
+\begin{align}
+q^* &\coloneqq \argmax_q \pi(q),
+\label{eq3}
+\end{align}
+où  $\pi(\cdot)$ est la fonCTion de profit donnée par:
+\begin{align*}
+\pi(q) &:= p(q)q - CT(q) = 120q – 2q^2,
+\end{align*}
+et la solution de \eqref{eq3}  donne:
+\begin{align*}
+\frac{\partial \pi}{\partial q}(q^*) = 0 &\Leftrightarrow 120-4q^* = 0 \Leftrightarrow q^* = 4,
+\end{align*}
+ce qui implique que,
+\begin{align*}
+p^* \coloneqq p(q^*) = 90, \quad \pi^* \coloneqq \pi(q^*) = 1800.
+\end{align*}
+
+\end{enumerate}
+\end{itemize}
+
+ \end{frame}
+
+ \begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 2\\}
+  \begin{itemize}
+    \item \textbf{\underline{Problème}}: calculer  profit pour une discrimination parfaite
+    \item \textbf{\underline{Solution}}: 
+    \begin{enumerate}[$\cdot$]
+      \item Le choix optimal de la firme est donné par:
+      \item Le monopole produira  au plus $\tilde{q}$ tel que,
+      \begin{align*}
+        p(\tilde{q}) = c^m(\tilde{q}) \eqqcolon \frac{\partial CT}{\partial q}(\tilde{q}) 
+        \Leftrightarrow  120 - \tilde{q} = 2\tilde{q}  \Leftrightarrow \tilde{q} = 40,
+      \end{align*}
+      ce qui implique que,
+      \begin{align*}
+        \tilde{p} \coloneqq p(\tilde{q}) = 80, \quad \tilde{\pi} \coloneqq \pi(\tilde{q}) = 1800.
+        \end{align*}
+      \item Dans ce cas le monopole va s’accaparer le surplus des consommateurs, que l’on peut calculer tel que:
+       \begin{align*}
+        %SC(\tilde{q}) &\coloneqq\int_0^{\tilde{q}}\left({p(q) - \tilde{p}}\right)\diff q =- \frac{\tilde{q}^{2}}{2} + 40\tilde{q} =40\frac{(120 - 80)}{2} = 800,
+        SC(\tilde{q}) &\coloneqq\int_0^{\tilde{q}}\left({p(q) - \tilde{p}}\right)\diff q =40\tilde{q} - \frac{\tilde{q}^{2}}{2}  = 800,
+       \end{align*}
+       et le profit de la firme en discrimination parfaite est donc:
+       \begin{align*}
+        \tilde{\pi} &= SC(\tilde{q}) + \tilde{p}\tilde{q} - CT(\tilde{q}) = 2400.
+       \end{align*}
+       
+    \end{enumerate}
+  \end{itemize}
+
+\end{frame}
+
+\section{Exercice 2: THETA }
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Données de l'exercice \\}
+\begin{itemize}
+    \item Monope THETA avec la fonCTion de coût:
+    \begin{align}
+    CT(q) &= 20q \Rightarrow c^m(q) \coloneqq \frac{\partial CT}{\partial q}(q) = 20,
+    \label{eq4}
+    \end{align}
+   \item Un marché caractérisé par la demande inverse:
+   \begin{align}
+     p(q)=50-q,
+     \label{eq5}
+   \end{align}
+\end{itemize}
+    \end{frame}
+    
+     \begin{frame}
+  [allowframebreaks]{\insertsection}
+  \framesubtitle{Question 1\\}
+  \begin{itemize}
+\item \textbf{\underline{Problème}}:  prix, quantité offerte et profit avec tarification linéaire.
+    \item \textbf{\underline{Solution}}: 
+  \begin{enumerate}[$\cdot$]
+    \item THETA choisit la quantité optimale $q^*$ comme solution de:
+    \begin{align*}
+      q^* &= \argmax_q \pi(q),
+    \end{align*}
+    avec:
+    \begin{align*}
+      \pi(q) &\coloneqq p(q)q - CT(q) = \underbrace{RT(q)}_{\coloneqq p(q)q} - CT(q),
+    \end{align*}
+    et $q^*$ est définie par la c.p.o.,
+    \begin{align}
+      \frac{\partial \pi}{\partial q}(q^*) = 0 \Leftrightarrow \underbrace{R^m(q^*)}_{\coloneqq \frac{\partial RT}{\partial q}(q^*)} 
+      = c^m(q^*),
+      \label{eq6}
+    \end{align}
+    où  $R^m(\cdot)$ est la recette marginale. 
+    \medskip
+    Nous avons ici avec \eqref{eq4} et \eqref{eq5}, $q^*$ défini par,
+    \begin{align*}
+      \underbrace{50-2q^*}_{R^m(q^*)} = \underbrace{20}_{c^m(q^*)} \Leftrightarrow q^* = 15.
+    \end{align*}
+    et on calcule aussi:
+    \begin{align*}
+      p^* \coloneqq p(q^*) = 50-q^* = 35 &, \quad \pi^* \coloneqq\pi(q^*) = 225.
+    \end{align*}
+  \end{enumerate}
+  \end{itemize}
+    \end{frame}
+    
+    \begin{frame}
+      [allowframebreaks]{\insertsection}
+      \framesubtitle{Question 2\\}
+      \begin{itemize}
+    \item \textbf{\underline{Problème}}:  prix, quantité offerte et profit en discrimination parfaite.
+        \item \textbf{\underline{Solution}}: 
+      \begin{enumerate}[$\cdot$]
+       \item En discrimination parfaite, le monopole peut tarifer
+        chaque consommateur à son consentement à payer pour s’accaparer l’ensemble du surplus. 
+        \item Il va donc produire jusqu’à ce que le consentement à payer soit plus faible que son coût de production 
+        ce qui arrive pour $\tilde{q}$ tel que:
+        \begin{align*}
+          p(\tilde{q}) = c^m(\tilde{q}) &\Leftrightarrow \tilde{q} = 30.
+        \end{align*}
+        \item Son profit est ici égal au surplus des consommateurs:
+        \begin{align*}
+          %SC(\tilde{q}) &\coloneqq\int_0^{\tilde{q}}\left({p(q) - \tilde{p}}\right)\diff q =- \frac{\tilde{q}^{2}}{2} + 40\tilde{q} =40\frac{(120 - 80)}{2}
+          \pi(\tilde{q}) &= SC(\tilde{q}) \coloneqq\int_0^{\tilde{q}}\left({p(q) - \tilde{p}}\right)\diff q =30\tilde{q} - \frac{\tilde{q}^{2}}{2}  = 450,
+         \end{align*}
+      \end{enumerate}
+    \end{itemize}
+      \end{frame}
+
+      \begin{frame}
+        [allowframebreaks]{\insertsection}
+        \framesubtitle{Question 3\\}
+        \begin{itemize}
+          \item \textbf{\underline{Problème}}:  prix, quantité offerte et profit avec  tarification binôme
+           (c.à.d., une partie fixe, une partie variable).
+
+    \item \textbf{\underline{Solution}}: 
+  \begin{enumerate}[$\cdot$]
+   \item En tarification binôme, le monopole va pouvoir s’accaparer l’ensemble du surplus grâce à sa partie fixe.
+   \item La partie variable de sa tarification est déterminée par le point/quantité ou il est juste encore rentable de 
+   produire ce qui arrive d'après la question précédente pour une quantité $\bar{q} = 30$ avec un prix $\bar{p}\coloneqq p(\bar{q}) = 20$ 
+   qui donne la partie variable de la tarification.
+   \item La partie fixe $t$ est égale au surplus des consommateur pour un prix $\bar{p} = 20$, et d'après la question précédente il s'agit de $t = 450$. 
+   \item On peut alors calculer le profit de la firme qui sera égal à 450.
+  \end{enumerate}
+\end{itemize}
+  \end{frame}
+   
+  \section{Exercice 3: BETA }
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Données de l'exercice \\}
+\begin{itemize}
+    \item Monopole BETA vendant sur deux marches caractérisés par les demandes:
+    \begin{align}
+   p_1(q_1) & = 200-q_1,\\
+   p_2(q_2) & = 300-q_2
+    \label{eq7}
+    \end{align}
+   \item Les coûts de BETA sont donnés par:
+   \begin{align}
+     CT(q_1, q_2)&=(q_1+q_2)^2,
+     \label{eq8}
+   \end{align}
+\end{itemize}
+    \end{frame}
+
+    \begin{frame}
+      [allowframebreaks]{\insertsection}
+      \framesubtitle{Question 1\\}
+      \begin{itemize}
+    \item \textbf{\underline{Problème}}:  quantités offertes.
+    \item \textbf{\underline{Solution}}: 
+    \begin{enumerate}[$\cdot$]
+     \item Le profit de la firme est donné par:
+     \begin{align}
+      \pi(q_1, q_2) &\coloneqq p_1(q_1)q_1 +  p_2(q_2)q_2 - c(q_1, q_2),
+      \label{eq9}
+     \end{align}
+     qu'elle maximise par rapport à $q_1$ et $q_2$ pour déterminer les quantités optimales $(q_1^*, q_2^*)$:
+     \begin{align}
+      (q_1^*, q_2^*) &=\argmax_{q_1, q_2}\pi(q_1, q_2).  
+      \label{eq10}
+     \end{align}
+     \item La c.p.o. devant être satisfaite en $(q_1^*, q_2^*)$ correspond à un système de deux équations(annulation du gradient
+     associé à $\pi(\cdot)$) à deux inconnues:
+     \begin{align}
+      \left\{
+      \begin{array}{ll}
+        \frac{\partial \pi}{\partial q_1}(q_1^*, q_2^*) &= 0\\
+        \frac{\partial \pi}{\partial q_2}(q_1^*, q_2^*) &= 0
+      \end{array}
+      \right.
+      \label{eq11}
+     \end{align}
+    \end{enumerate}
+  \end{itemize}
+
+    \end{frame}
+\end{document}

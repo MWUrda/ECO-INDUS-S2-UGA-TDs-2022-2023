@@ -1,0 +1,430 @@
+\documentclass[notes, ignorenonframetext, compress, 9pt, xcolor=svgnames, aspectratio=169]{beamer} 
+\input{../../../Config_diapos_2}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{enumerate}   
+\usepackage{multirow}
+\usepackage{txfonts}
+\usepackage{mathrsfs}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+\usetikzlibrary{positioning, arrows.meta}
+\usepgfplotslibrary{fillbetween}
+\newcommand{\A}{(0,0) ++(135:2) circle (2)}
+\newcommand{\B}{(0,0) ++(45:2) circle (2)}
+\DeclareMathOperator{\C}{C}
+\DeclareMathOperator{\util}{u}
+%\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\setbeamersize{text margin left=1.2cm,text margin right=1.2cm} 
+\setbeamersize{text margin left=1.5em,text margin right=1.5em} 
+%\usepackage{xr}
+%\externaldocument{Econometrie1_UGA_P2e}
+  \usepackage{eso-pic}
+%\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+%\put(\LenToUnit{0.9\paperwidth},\LenToUnit{0.85\paperheight}){#1}}}
+%\AddToShipoutPictureFG{
+ % \AtPagemyUpperLeft{{\includegraphics[width=1.1cm,keepaspectratio]{logoUGA2020.pdf}}}
+%}%
+
+%\setbeamercolor{title}{fg=black}
+%\setbeamercolor{frametitle}{fg=black}
+%\setbeamercolor{section in head/foot}{fg=black}
+%\setbeamercolor{author in head/foot}{bg=Brown}
+%\setbeamercolor{date in head/foot}{fg=Brown}
+\AtBeginSection[]
+  {
+    \ifnum \value{framenumber}>1
+      \begin{frame}<beamer>
+      \frametitle{Outline}
+      \tableofcontents[currentsection]
+      \end{frame}
+    \else
+    \fi
+  }
+\setbeamertemplate{section page}
+{
+    \begin{centering}
+    \begin{beamercolorbox}[sep=11pt,center]{part title}
+    \usebeamerfont{section title}\thesection.~\insertsection\par
+    \end{beamercolorbox}
+    \end{centering}
+}
+
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}}
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}}
+\title[]{ \textbf{ÉCONOMIE INDUSTRIELLE}\footnote{Responsable du cours: Alexis Garapin.}\\(\textbf{UGA, L3 E2AD, S2})}
+\subtitle{TRAVAUX DIRIGÉS: TD 3 \\   JEUX RÉPÉTÉS ET COLLUSION}
+\date{\today}
+\author{Michal W. Urdanivia\inst{*}}
+\institute{\inst{*}UGA, Facult\'e d'\'Economie, GAEL, \\
+e-mail:
+ \href{
+     mailto:michal.wong-urdanivia@univ-grenoble-alpes.fr}{michal.wong-urdanivia@univ-grenoble-alpes.fr}}
+
+%\titlegraphic{\includegraphics[width=1cm]{logoUGA2020.pdf}
+%}
+
+\begin{document}
+
+%%% TIKZ STUFF
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}
+\newcommand\markbottomright[2]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+\tikzstyle{observed}=[draw,circle,fill=gray!50]
+
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+ \tableofcontents
+    \end{frame}
+%\begin{frame}
+%\frametitle{Contenu}
+%\tableofcontents[pausesections, pausesubsections]
+%\end{frame}
+
+%\section{Qu'est-ce que l’économétrie ? A quoi (à qui) ça sert ?}
+%\frame{\sectionpage}
+%\begin{frame}
+%  \tableofcontents  
+%\end{frame}
+\section{Rappels de cours}
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Le modèle de Cournot de base \\}
+\begin{itemize}
+    \item Il s'agit d'un modèle de concurrence à la Cournot. 
+        \item Chaque firme a une fonction objectif qui est son profit: 
+        \begin{align*}
+            \pi_i(q_i, q_j) &= P(Q)q_i -c_i(q_i),  \ i, j= 1, 2, \ i\neq j.
+        \end{align*}
+        où $P(Q)$ est la fonction de demande inverse avec $Q = q_1 + q_2$ est $c_i(q_i)$ 
+        est la fonction de coût de la firme $i$.
+        \item La variable de décision est la quantité à produire $q_i$. 
+        \item L'équilibre est une paire $(q_1^*, q_2^*)$ qui est un équilibre de Nash dans un jeu d'information complète.
+        \item En outre le modèle de base suppose les formes suivantes pour $c_i(\cdot)$ et $P(\cdot)$:
+        \begin{align*}
+        c_i(q_i) &\coloneqq cq_i \Rightarrow  \underbrace{c^m_i(q_i)}_{\substack{\text{Coût}\\ \text{Marginal}}} \coloneqq\frac{\partial c}{\partial q_i}(q_i) = c, \ c\in\R_{+}^*, \\
+        P(Q) &\coloneqq a - bQ, \ a, b  \in\R_{+}^*\times \in\R_{+}^*.
+        \end{align*}
+        
+        \item  Le choix optimal de la firme $i$ est donné par sa \textbf{fonction de meilleure réponse}, $q_i^{mr}(q_j)$  qui est définie implicitement comme solution du problème:
+        \begin{align*}
+        q_i^* &= \argmax_{q_i}\pi_i(q_i, q_j) \eqqcolon q_i^{mr}(q_j) 
+        \end{align*}
+        où $\pi(q_i, q_j)$ est la fonction de profit de la firme $i$:
+        \begin{align*}
+        \pi_i(q_i, q_j) &\coloneqq P(Q) q_i - c_i(q_i).
+        \end{align*}
+        \item  L'équilibre  $(q_1^*, q_2^*)$ est alors obtenu comme solution du système:
+       \begin{align*}
+       q_i^* =  q_i^{mr}(q_j^*),  \ i, j = 1, 2; \ i\neq j,
+       \end{align*}
+       Autrement dit, chaque firme joue sa meilleure réponse.
+        
+        \item Avec les fonctions $c_i(q_i) \coloneqq cq_i$ et $P(Q) \coloneqq a - bQ$, $q_i^{mr}(q_j)$ est explicitée à partir de la condition du 1er ordre associée à la maximisation de $\pi_i(\cdot)$ par rapport à $q_i$:
+    \begin{align*}
+        \frac{\partial \pi}{\partial q_i}\left(q_i^*, q_j\right)=0   &\Leftrightarrow   a - 2bq_i^* - bq_j = c  \Leftrightarrow q_i^* = \frac{(a-c)}{2b} - \frac{q_j}{2} \eqqcolon q_i^{mr}(q_j). 
+    \end{align*}
+   \item On calcule l'équilibre comme solution en $(q_1^*, q_2^*)$  du système:
+   \begin{align*}
+   \left\{
+            \begin{array}{l}
+            q_1^* = q_1^{mr}(q_2^*) \\
+            q_2^* = q_2^{mr}(q_1^*) 
+            \end{array}\right.
+        \end{align*}
+ ce qui donne avec les fonction de meilleure réponse $q_1^{mr}(q_2) \coloneqq \frac{(a-c)}{2b} - \frac{q_2}{2}$, et
+  $q_2^{mr}(q_1) \coloneqq \frac{(a-c)}{2b} - \frac{q_1}{2}$.
+ \begin{align}
+    q_1^* &= q_2^*  = \frac{a-c}{3b}.
+    \label{eq1}
+  \end{align}
+  \item Et  on calcule aussi les profits et prix du bien sur le marché:
+  \begin{align}
+      p^{*} = \frac{a}{3} +\frac{2c}{3}&, \  \pi_1^{*} =  \pi_2^{*} = \frac{(a-c)^2}{9b},
+      \label{eq2}
+      \end{align}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Entente\\}
+
+    \begin{itemize}
+        \item Les deux firmes fixent la quantité de monopole notée $q^{ca}$ qu'elles décident en maximisant un profit de Monopole.
+        \item Pour un niveau décidé de produit $q^{ca}$ chacune produit alors $q_i^{ca} = \frac{q^{ca}}{2}$, $i=1, 2$.
+        \item Pour obtenir  $q^{ca}$  on considère le profit donné par,
+        \begin{align*}
+            \pi(q^{ca}) &= P(q^{ca})q^{ca} - cq^{ca} = (a-bq^{ca})q^{ca} - cq^{ca}
+        \end{align*}
+        \item La quantité optimale/de monopole $q^{ca^*}$ est obtenue comme:
+        \begin{align}
+            q^{ca^*} &=\argmin_{q^{ca}}  \pi(q) \Rightarrow \frac{\partial \pi}{\partial q}( q^{ca^*}) = 0 
+            \Leftrightarrow  q^{ca^*} = \frac{(a-c)}{2b}.
+            \label{eq3}
+        \end{align}
+        D'où le prix d'équilibre et le profit du cartel:
+        \begin{align}
+        p^{ca^*} &\coloneqq P(q^{ca^*}) = a - b\left(q^{ca^*}\right) = \frac{(a+c)}{2}, \nonumber\\
+        \pi ^{ca^*} &\coloneqq p^{ca^*}  q^{ca^*}  - c q^{ca^*}  =  \frac{(a-c)^2}{4b}.
+        \label{eq4}
+        \end{align}
+        Le profit de la firme $i$ étant alors:
+        \begin{align}
+        \pi_i ^{ca^*} &\coloneqq \frac{\pi ^{ca^*}}{2} = \frac{(a-c)^2}{8b}.
+        \label{eq5}
+        \end{align}
+    \end{itemize}
+    \end{frame}
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Déviation sur une période\\}
+\begin{itemize}
+\item Supposons que la firme $i$ dévie/triche par rapport à l'entente.
+\item Dans ce cas alors que $j$ joue la quantité de l'entente  $q_j^{ca^*} \coloneqq \frac{q^{ca^*}}{2} =  \frac{(a-c)}{4b}$, $i$ joue sa meileure réponse 
+et fait le choix $q_i^{d^*}$ par:
+\begin{align}
+q_i^{d^*} &\coloneqq = q_i^{mr}(q_j^{ca^*} ) = \frac{(a-c)}{2b} - \frac{q_j^{ca^*} }{2} = \frac{(a-c)}{2b} - \frac{(a-c)}{8b} = \frac{3(a-c)}{8b},
+\label{eq6}
+\end{align}
+ce qui lui donne un profit,
+\begin{align}
+\pi_i^{d^*} &= \frac{9(a-c)^2}{64b}.
+\label{eq7}
+\end{align}
+\end{itemize}
+    \end{frame}
+    
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Stabilité de l’entente\\}
+\begin{itemize}
+\item En fait le jeu consistant à tricher ou s'entendre s'apparente au
+ \textbf{\underline{jeu du prisonnier}} avec la représentation de forme normale et extensives suivantes:
+
+
+
+		\begin{figure}[!h]
+\begin{tabular}{*4c} 
+	& &\multicolumn{2}{c}{Firme 2}\\
+	& & Tricher &Cartel \\ \cline{3-4}
+	\multirow{2}{*}{Firme 1}& Tricher & \multicolumn{1}{|c|}{$\underbrace{\frac{(a-c)^2}{9b}, \frac{(a-c)^2}{9b}}_{\text{Équilibre de Nash}}$} & \multicolumn{1}{c|}{$\frac{9(a-c)^2}{64b},\frac{3(a-c)^2}{32b}$} \\[10pt] \cline{3-4} 
+	& Cartel & \multicolumn{1}{|c|}{$\frac{3(a-c)^2}{32b}, \frac{9(a-c)^2}{64b}$} &\multicolumn{1}{c|}{$\frac{(a-c)^2}{8b}, \frac{(a-c)^2}{8b}$}\\[10pt] \cline{3-4}
+	\end{tabular}
+    \caption{Représentation de la concurrence à la Cournot sous forme normale.}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+   \small
+   \begin{tikzpicture}[thin,
+     level 1/.style={sibling distance=60mm},
+     level 2/.style={sibling distance=30mm},
+     level 3/.style={sibling distance=15mm},
+     every circle node/.style={minimum size=1.5mm,inner sep=0mm}]
+     
+     \node[circle,draw,label=above: Firme 1] (root) {}
+       child { node [circle,fill,label=above: Firme 2] {}
+         child { 
+           node {$\left(\frac{(a-c)^2}{8b}, \frac{(a-c)^2}{8b}\right)$}
+           edge from parent
+             node[left] {Cartel}}
+         child { 
+           node {$\left(\frac{3(a-c)^2}{32b}, \frac{9(a-c)^2}{64b}\right)$}
+           edge from parent
+             node[right] {Triche}}
+         edge from parent
+           node[left] {Cartel}}
+       child { node [circle,fill,label=above: Firme 2] {}
+       child { 
+        node {$\left(\frac{9(a-c)^2}{64b},\frac{3(a-c)^2}{32b}\right)$}
+        edge from parent
+          node[left] {Cartel}}
+          child { 
+            node {$\left(\frac{(a-c)^2}{9b}, \frac{(a-c)^2}{9b}\right)$}
+            edge from parent
+              node[right] {Triche}}
+          edge from parent
+            node[right] {Triche}};
+   \end{tikzpicture}
+   \end{center}
+   \caption{Représentation de la concurrence à la Cournot sous forme extensive}
+ \end{figure}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Jeu/concurrence à la Cournot infiniment répété et Actualisation\\}
+   \begin{itemize}
+        \item Supposons que le jeu se répète deux fois: la firme $i$ choisit 
+        la quantité $q_{it}$ à la période $t$, pour $i=1, 2$, et $t=1, 2$.
+        \item \textbf{\underline{Quel est l'équilibre en sous-jeu parfait?}} 
+        \item On résout le jeu(par induction) à rebours:
+        \begin{enumerate}[-]
+            \item En $t=2$ l'unique équilibre de Nash est $(triche, triche)$.
+            \item En $t=1$ l'unique équilibre de Nash est $(triche, triche)$.
+            \item Par conséquent, l'unique équilibre en sous-jeux parfait est $\left( 
+                (triche, triche), (triche, triche)
+            \right)$.
+        \end{enumerate}
+        \item \textbf{\underline{Autres questions}} : 
+        \begin{enumerate}[-]
+         \item qu'en est-il de $\left((cartel,cartel), (cartel,cartel)\right)$? 
+         \item qu'en est-il de $\left((cartel, triche), (cartel, triche)\right)$?
+         \item qu'en est-il de: la firm 1 joue $(cartel; triche \ \text{si} \ triche, cartel  \ \text{si} \ cartel)$,
+          et la firme 2 joue $(cartel; triche \ \text{si} \ triche, cartel  \ \text{si} \ cartel)$?
+        \item du jeu à 3,..., $N$ périodes?
+\end{enumerate}
+\end{itemize}
+\end{frame}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\framesubtitle{Cournot infiniment\\}
+
+\begin{itemize}
+    \item On note comme précédemment $q^{ca}_i$ la quantité de cartel pour la firme $i$(maximisant le profit des deux firmes), et $q_i^*$ 
+    la quantité en concurrence à la Cournot.
+    \item Nous avons le résultat suivant:  
+    \begin{proposition}
+        Si le taux d'actualisation $\delta$ est "suffisamment"  élevé 
+         alors les stratégies suivantes constituent des équilibre de sous-jeu parfaits pour  
+         le jeu de Cournot infiniment répété:  
+         \begin{enumerate}[(a)]
+             \item En $t$, la firme $i$ joue  $q_{it} =q^{ca}_i$ si $q_{j,t-1} =q^{ca}_j$ pour $j=1$ et $j=2$. 
+             \item Jouer $q^*_i$ si $q_{j,t-1} \neq q^{ca}_j$ pour soit $j=1$ ou $j=2$.
+         \end{enumerate}
+    \end{proposition}
+    \item La firme $i$ coopère tant que $j$ coopère.
+    \item Une fois que $j$ triche $i$ produit la quantité d'équilibre de Nash-Cournot 
+    pour toutes les périodes suivantes: \textbf{Nash reversion}.
+    \item “Grim strategy”: pas de deuxième chance.
+    \item Pour démontrer que ces strategies constituent des équilibres en sous-jeu parfaits il   
+    faut obtenir des conditions qui "prescrivent" que la meilleure réponse 
+    de la firme $i$ étant donné celle de la firme $j$ est aussi la meilleure réponse 
+    dans chaque sous-jeu.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{\insertsection}
+\framesubtitle{Éléments de démonstration}
+\begin{itemize}
+    \item Pour la firme $i=1, 2$, deux types de sous-jeu sont à considérer:
+    \item \textbf{\underline{Sous-jeu de type 1}}:
+    Après une période où l'un des joueurs a triché ($i$ lui-même ou bien $j$, avec $i\neq j$):
+    \begin{enumerate}[-]
+        \item La stratégie proposée indique de jouer $q_i^*$ pour toujours étant donné que $j$ joue aussi 
+        cette stratégie(c.à.d., ne pas coopérer face à la non coopération de  l'autre)
+        \item C'est un équilibre de Nash du sous-jeu: jouer "$q_i^*$ pour toujours" est la meilleure 
+        réponse à la stratégie adoptée par $j$ de jouer "$q_j^*$ pour toujours".
+        \item Ceci vérifie les critères d'un équilibre de sous-jeu parfait.
+    \end{enumerate}
+    \framebreak
+    \item \textbf{\underline{Sous-jeu de type 2}}: Après une période sans triche.
+    \begin{enumerate}[-]
+        \item La stratégie proposée indique de coopérer et jouer $q_i^{ca}$, avec le profit actualisé de $\frac{\pi_i^{ca}}{1-\delta}$
+        \item La meilleure stratégie alternative est de jouer $q_i^{mr}(q_j^{ca}) =: q_i^d$ à la période en cours,
+         mais ceci entraîne $q_j =  q_j^*$ pour toujours. Le profit actualisé est ici 
+          $\pi^{d^*_i}  + \delta\left(\frac{\pi_i^*}{(1-\delta)}\right)$.
+         \item Pour que $q_i^{ca}$ soit un équilibre de Nash de ce sous-jeu, il est nécessaire que,
+         \begin{align}
+            \underbrace{\frac{\pi_i^{ca^*}}{1-\delta}}_{\text{profits sous coopération}} &> \underbrace{\pi^{d^*_i} + \delta\left(\frac{\pi_i^*}{(1-\delta)}\right)}_{\text{profits sous déviation/triche}}\nonumber\\
+            &\Leftrightarrow \delta > \frac{\pi^{d^*_i} - \pi_i^{ca^*} }{\pi^{d^*_i}  - \pi_i^*},
+            \label{eq8}
+            \end{align}
+         et avec les expressions de $\pi_i^{ca^*}$, $\pi^{d^*_i} $, et $\pi_i^*$   on obtient que : $\delta > \frac{9}{17}\approx 0.529$.
+    \end{enumerate}
+    \item Par conséquent, la \textbf{Nash reversion} indique une meilleure réponse dans ces deux sous-jeux 
+ pour $\delta$ "suffisamment élevé" avec $\delta >\frac{9}{17}$. 
+    \item Dans ce cas la \textbf{Nash reversion} constitue un équilibre de sous-jeu parfait.
+\end{itemize}
+\end{frame}
+
+\section{Application}
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\begin{itemize}
+    \item D'après l'énoncé de l'exercice:
+    
+    \begin{align*}
+    P(Q) &\coloneqq a - Q \quad (\text{c.à.d.} \ b\equiv 1).
+    \end{align*}
+    \item On a alors, pour $i=1, 2$, selon que l'on est en,
+    \begin{enumerate}[$\cdot$]
+    
+    \item Cournot:
+    \begin{align*}
+    q_i ^* &= \frac{a-c}{3} \quad, \text{d'après} \ \eqref{eq1}.
+    \end{align*}
+    
+    \begin{align*}
+    p^{*} &= \frac{a}{3} +\frac{2c}{3},\\
+    \pi_i ^* &= \frac{(a-c)^2}{9}, \quad \text{d'après} \ \eqref{eq2}.
+    \end{align*}
+    \item Cartel:
+     \begin{align*}
+    q^{ca^*} &= \frac{(a-c)}{2}, \quad \text{d'après} \ \eqref{eq3},\\
+     p^{ca^*} &= \frac{(a+c)}{2}, \quad \text{d'après} \ \eqref{eq4},\\
+     \pi_i ^{ca^*} &= \frac{(a-c)^2}{8}, \quad \text{d'après} \ \eqref{eq5}
+        \end{align*}
+        \item Suite à une déviation du cartel:
+        \begin{align*}
+        q_i^{d^*} &= \frac{3(a-c)}{8}, \quad \text{d'après} \ \eqref{eq6},\\
+        \pi_i^{d^*} &= \frac{9(a-c)^2}{64}, \quad \text{d'après} \ \eqref{eq7}.\\
+        \end{align*}
+    \end{enumerate}
+    \item Il est possible de vérifier qu'on a avec ces expressions pour le "seuil" dans \eqref{eq8}:
+    \begin{align*}
+    \frac{\pi^{d^*_i} - \pi_i^{ca^*} }{\pi^{d^*_i}  - \pi_i^*}&\approx 0.529.
+    \end{align*}
+\end{itemize}
+\end{frame}
+
+\section{Concurrence en prix}
+\frame{\sectionpage}
+\begin{frame}
+[allowframebreaks]{\insertsection}
+\begin{itemize}
+    \item On reste sur le cas de la demande inverse $p(Q) = a-Q$, avec les valeurs calculées à la section précédente.
+    \item En cas d'entente le profit de $i$ est donc $\pi_i ^{ca^*}  = \frac{(a-c)^2}{8}$.
+    \item En concurrence par les prix du type modèle de duopole de Bertrand le profit de chaque firme est nul(car le coût marginal est constant, c.f., cours de microéconomié et/ou d'EI du S1), et on le note $\pi_i^*$ avec donc $\pi_i^* = 0$
+    \item Quand la firme $i$ dévie elle capte tout le profit du cartel(ou donc dans ce cas monopole) $\pi^{d^*_i}  = \pi ^{ca^*} =  \frac{(a-c)^2}{4}$(en utilisant \eqref{eq4} avec $b\equiv 1$).
+    \item Dans ce cas on calcule pour le "seuil" dans \eqref{eq8}:
+    \begin{align*}
+    \frac{\pi^{d^*_i} - \pi_i^{ca^*} }{\pi^{d^*_i}  - \pi_i^*}& = \frac{ \frac{(a-c)^2}{4} - \frac{(a-c)^2}{8}}{\frac{(a-c)^2}{4} - 0} = 0.5.
+    \end{align*}
+\end{itemize}
+\end{frame}
+\end{document}

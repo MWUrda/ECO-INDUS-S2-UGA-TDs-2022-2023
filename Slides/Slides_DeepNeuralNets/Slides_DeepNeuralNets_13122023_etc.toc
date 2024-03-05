@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Formal introduction and general ideas}{15}{0}{2}
+\beamer@sectionintoc {3}{Introduction to deep learning for econometrics}{29}{0}{3}
+\beamer@sectionintoc {4}{Setup: what are neural nets?}{32}{0}{4}
+\beamer@sectionintoc {5}{Network design}{37}{0}{5}
+\beamer@sectionintoc {6}{Backpropagation}{43}{0}{6}

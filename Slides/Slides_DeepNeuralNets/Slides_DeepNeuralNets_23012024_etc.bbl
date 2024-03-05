@@ -1,0 +1,102 @@
+\begin{thebibliography}{16}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+
+\bibitem[{Athey and Imbens(2019)}]{AtheyImbensARE2019}
+Athey, Susan and Guido~W. Imbens. 2019.
+\newblock \enquote{Machine Learning Methods That Economists Should Know About.}
+\newblock \emph{Annual Review of Economics} 11~(1):685--725.
+
+\bibitem[{Azinovic, Gaegauf, and Scheidegger(2022)}]{AzinovicEtalIER2022}
+Azinovic, Marlon, Luca Gaegauf, and Simon Scheidegger. 2022.
+\newblock \enquote{DEEP EQUILIBRIUM NETS.}
+\newblock \emph{International Economic Review} 63~(4):1471--1525.
+
+\bibitem[{Bartlett, Montanari, and Rakhlin(2021)}]{Bartlettetal2021Arxiv}
+Bartlett, Peter~L., Andrea Montanari, and Alexander Rakhlin. 2021.
+\newblock \enquote{Deep learning: a statistical viewpoint.}
+\newblock \urlprefix\url{https://arxiv.org/abs/2103.09177}.
+
+\bibitem[{Bottou, Curtis, and Nocedal(2016)}]{BottouetalArxiv2016}
+Bottou, Léon, Frank~E. Curtis, and Jorge Nocedal. 2016.
+\newblock \enquote{Optimization Methods for Large-Scale Machine Learning.}
+\newblock \urlprefix\url{https://arxiv.org/abs/1606.04838}.
+
+\bibitem[{Chernozhukov et~al.(2017)Chernozhukov, Chetverikov, Demirer, Duflo,
+  Hansen, and Newey}]{ChernozhukovEtalAER2017}
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian
+  Hansen, and Whitney Newey. 2017.
+\newblock \enquote{Double/Debiased/Neyman Machine Learning of Treatment
+  Effects.}
+\newblock \emph{American Economic Review} 107~(5):261--65.
+
+\bibitem[{Chernozhukov et~al.(2021)Chernozhukov, Newey, Quintas-Martinez, and
+  Syrgkanis}]{ChernozhukovEtalArxiv2021}
+Chernozhukov, Victor, Whitney~K. Newey, Victor Quintas-Martinez, and Vasilis
+  Syrgkanis. 2021.
+\newblock \enquote{RieszNet and ForestRiesz: Automatic Debiased Machine
+  Learning with Neural Nets and Random Forests.}
+
+\bibitem[{Farrell, Liang, and Misra(2021)}]{FarreletalECTA16901}
+Farrell, Max~H., Tengyuan Liang, and Sanjog Misra. 2021.
+\newblock \enquote{Deep Neural Networks for Estimation and Inference.}
+\newblock \emph{Econometrica} 89~(1):181--213.
+\newblock
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA16901}.
+
+\bibitem[{Finan and Pouzo(2021)}]{FinanPouzoArxiv2021}
+Finan, Frederico and Demian Pouzo. 2021.
+\newblock \enquote{Reinforcing RCTs with Multiple Priors while Learning about
+  External Validity.}
+
+\bibitem[{Gentzkow, Shapiro, and Taddy(2019)}]{GentzkowEtalEcta2019}
+Gentzkow, Matthew, Jesse~M. Shapiro, and Matt Taddy. 2019.
+\newblock \enquote{Measuring Group Differences in High-Dimensional Choices:
+  Method and Application to Congressional Speech.}
+\newblock \emph{Econometrica} 87~(4):1307--1340.
+
+\bibitem[{Goodfellow, Bengio, and Courville(2016)}]{Goodfellow-et-al-2016}
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press.
+\newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem[{Goulet~Coulombe et~al.(2022)Goulet~Coulombe, Leroux, Stevanovic, and
+  Surprenant}]{CoulombeEtalJAE2022}
+Goulet~Coulombe, Philippe, Maxime Leroux, Dalibor Stevanovic, and Stéphane
+  Surprenant. 2022.
+\newblock \enquote{How is machine learning useful for macroeconomic
+  forecasting?}
+\newblock \emph{Journal of Applied Econometrics} 37~(5):920--964.
+
+\bibitem[{Hartford et~al.(2017)Hartford, Lewis, Leyton-Brown, and
+  Taddy}]{HartfordEtalProced2017}
+Hartford, Jason, Greg Lewis, Kevin Leyton-Brown, and Matt Taddy. 2017.
+\newblock \enquote{Deep IV: A Flexible Approach for Counterfactual Prediction.}
+\newblock In \emph{Proceedings of the 34th International Conference on Machine
+  Learning - Volume 70}, ICML'17. JMLR.org, 1414–1423.
+
+\bibitem[{Mcculloch and Pitts(1943)}]{mcculloch43a}
+Mcculloch, Warren and Walter Pitts. 1943.
+\newblock \enquote{A Logical Calculus of Ideas Immanent in Nervous Activity.}
+\newblock \emph{Bulletin of Mathematical Biophysics} 5:127--147.
+
+\bibitem[{Mullainathan and Spiess(2017)}]{MullainathanSpiessJEP2017}
+Mullainathan, Sendhil and Jann Spiess. 2017.
+\newblock \enquote{Machine Learning: An Applied Econometric Approach.}
+\newblock \emph{Journal of Economic Perspectives} 31~(2):87--106.
+
+\bibitem[{Rosenblatt(1958)}]{Rosenblatt1958ThePA}
+Rosenblatt, Frank. 1958.
+\newblock \enquote{The perceptron: a probabilistic model for information
+  storage and organization in the brain.}
+\newblock \emph{Psychological review} 65 6:386--408.
+
+\bibitem[{Zhang et~al.(2021)Zhang, Lipton, Li, and Smola}]{ZhangetalBook}
+Zhang, Aston, Zachary~C. Lipton, Mu~Li, and Alexander~J. Smola. 2021.
+\newblock \enquote{Dive into Deep Learning.}
+\newblock \urlprefix\url{https://arxiv.org/abs/2106.11342}.
+
+\end{thebibliography}
